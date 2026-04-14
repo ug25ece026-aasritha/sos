@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Emergency SOS</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      margin-top: 50px;
+    }
+
+    button {
+      padding: 30px 50px;
+      font-size: 20px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<h style="font-size:50px">Emergency SOS</h1>
+
+<button onclick="sendSOS()">SOS</button>
+
+<script>
+function sendSOS() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    alert("Geolocation not supported");
+  }
+}
+
+function showPosition(position) {
+  var lat = position.coords.latitude;
+  var lon = position.coords.longitude;
+
+  // SOS message with location
+  var message = "SOS! I need help. My location: https://maps.google.com/?q=" + lat + "," + lon;
+
+  var phone = "1234567890"; // replace with real number
+
+  // Open SMS app
+  window.location.href = "sms:" + phone + "?body=" + encodeURIComponent(message);
+}
+</script>
+
+</body>
+</html>
